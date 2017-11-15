@@ -23,12 +23,14 @@ void mruby_task(void *pvParameter)
   int ai = mrb_gc_arena_save(mrb);
   ESP_LOGI(TAG, "%s", "Loading binary...");
   mrb_load_irep_cxt(mrb, example_mrb, context);
+  
   if (mrb->exc) {
     ESP_LOGE(TAG, "Exception occurred: %s", mrb_str_to_cstr(mrb, mrb_inspect(mrb, mrb_obj_value(mrb->exc))));
     mrb->exc = 0;
   } else {
     ESP_LOGI(TAG, "%s", "Success");
   }
+  
   mrb_gc_arena_restore(mrb, ai);
   mrbc_context_free(mrb, context);
   mrb_close(mrb);
@@ -42,5 +44,6 @@ void mruby_task(void *pvParameter)
 void app_main()
 {
   nvs_flash_init();
-  xTaskCreate(&mruby_task, "mruby_task", 8192, NULL, 5, NULL);
+  xTaskCreatePinnedToCore(mruby_task, "mruby_task", (1024*24)-21000, NULL, 1, NULL,0);
+  vTaskDelete(xTaskGetCurrentTaskHandle());
 }
