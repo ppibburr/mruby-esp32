@@ -34,14 +34,14 @@ MRuby::CrossBuild.new('esp32') do |conf|
     cc.flags << '-Wno-maybe-uninitialized'
     cc.flags.collect! { |x| x.gsub('-MP', '') }
 
-    cc.defines << %w(MRB_HEAP_PAGE_SIZE=1024)
+    cc.defines << %w(MRB_HEAP_PAGE_SIZE=64)
     cc.defines << %w(MRB_USE_IV_SEGLIST)
     cc.defines << %w(KHASH_DEFAULT_SIZE=8)
-    cc.defines << %w(MRB_STR_BUF_MIN_SIZE=128)
-   #cc.defines << %w(MRB_GC_TURN_OFF_GENERATIONAL_GC)
+    cc.defines << %w(MRB_STR_BUF_MIN_SIZE=20)
+    cc.defines << %w(MRB_GC_STRESS)
     cc.defines << %w(MRB_USE_FLOAT)    
     cc.defines << %w(MRB_WORD_BOXING)
-    #cc.defines << %w(MRB_DISABLE_STDIO) 
+    cc.defines << %w(MRB_DISABLE_STDIO) 
     cc.defines << %w(MRB_USE_ETEXT_EDATA )  
     cc.defines << %w(MRB_STACK_GROWTH=32)       
 
@@ -62,12 +62,10 @@ MRuby::CrossBuild.new('esp32') do |conf|
   conf.build_mrbtest_lib_only
   conf.disable_cxx_exception
 
-  conf.gem :core => "mruby-print"
-  conf.gem :core => "mruby-sprintf"
   conf.gem :core => "mruby-compiler"
   conf.gem :core => "mruby-time"
   conf.gem :github => "mruby-esp32/mruby-esp32-system"
   #conf.gem :github => "mruby-esp32/mruby-esp32-wifi"
-  conf.gem "/home/kitty-katie/git/mruby-esp32-gpio"  
-  conf.gem "/home/kitty-katie/git/mruby-esp32-loop"    
+  conf.gem "#{ENV['HOME']}/esp/mruby-esp32-gpio"  
+  conf.gem "#{ENV['HOME']}/esp/mruby-esp32-loop"    
 end
