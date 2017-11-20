@@ -44,6 +44,9 @@ void mruby_task(void *pvParameter)
 void app_main()
 {
   nvs_flash_init();
+  nvs_handle nvs;
+  nvs_open("mruby-esp32", NVS_READWRITE, &nvs);
+  nvs_set_str(nvs, "code", "p 5");
   xTaskCreatePinnedToCore(mruby_task, "mruby_task", (1024*16), NULL, 1, NULL,0);
   vTaskDelete(xTaskGetCurrentTaskHandle());
 }

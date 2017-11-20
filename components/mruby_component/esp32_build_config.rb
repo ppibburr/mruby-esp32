@@ -38,7 +38,7 @@ MRuby::CrossBuild.new('esp32') do |conf|
     cc.defines << %w(MRB_USE_IV_SEGLIST)
     cc.defines << %w(KHASH_DEFAULT_SIZE=8)
     cc.defines << %w(MRB_STR_BUF_MIN_SIZE=20)
-    cc.defines << %w(MRB_GC_STRESS)
+    cc.defines << %w(MRB_GC_TURN_OFF_GENERATIONAL_GC)
     cc.defines << %w(MRB_USE_FLOAT)    
     cc.defines << %w(MRB_WORD_BOXING)
     cc.defines << %w(MRB_DISABLE_STDIO) 
@@ -66,6 +66,6 @@ MRuby::CrossBuild.new('esp32') do |conf|
   conf.gem :core => "mruby-time"
   conf.gem :github => "mruby-esp32/mruby-esp32-system"
   #conf.gem :github => "mruby-esp32/mruby-esp32-wifi"
-  conf.gem "#{ENV['HOME']}/esp/mruby-esp32-gpio"  
-  conf.gem "#{ENV['HOME']}/esp/mruby-esp32-loop"    
+  conf.gem "#{ENV['HOME']}/git/mruby-esp32-gpio"  
+  conf.gem "#{ENV['HOME']}/git/mruby-esp32-loop"    
 end
