@@ -65,9 +65,11 @@ MRuby::CrossBuild.new('esp32') do |conf|
   conf.gem :core => "mruby-compiler"
   conf.gem :core => "mruby-time"
   
+  conf.gem :github => "mattn/mruby-json"  
+  
   conf.gem :github => "mruby-esp32/mruby-esp32-system"
+  
   conf.gem :github => "ppibburr/mruby-esp32-gpio"  
   conf.gem :github => "ppibburr/mruby-esp32-nvs"
-  
-  conf.gem "/home/hmi/git/mruby-esp32-es"    
+  conf.gem :github => "ppibburr/mruby-esp32-es"    
 end
