@@ -3,4 +3,4 @@
 	url = https://github.com/mruby/mruby.git
 [submodule "components/esp-request"]
 	path = components/esp-request
-	url = https://github.com/tuanpmt/esp-request
+	url = https://github.com/ppibburr/esp-request
